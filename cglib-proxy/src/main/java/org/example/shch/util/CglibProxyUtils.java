@@ -36,4 +36,12 @@ public class CglibProxyUtils {
         enhancer.setCallback(new CGLibProxy());
         return (T) enhancer.create();
     }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T createProxyInstance(T t, Class<?>[] classes, Object[] objects) {
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(t.getClass());
+        enhancer.setCallback(new CGLibProxy());
+        return (T) enhancer.create(classes, objects);
+    }
 }
